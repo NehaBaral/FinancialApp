@@ -47,17 +47,11 @@ export default function App() {
       })}>
         <Tab.Screen name="Transaction" component={TransactionStackNavigation}
           options={{ headerShown: false }}></Tab.Screen>
-        <Tab.Screen name="Summary" component={SummaryComponent}></Tab.Screen>
+        <Tab.Screen name="Summary" component={SummaryComponent}
+         options={{ title: 'Summary' , headerTitleAlign:  'left'}}></Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+

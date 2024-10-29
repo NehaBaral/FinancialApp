@@ -1,9 +1,18 @@
 import { TouchableOpacity, View, Text, FlatList } from "react-native";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./style";
 import { transactions } from "../../data/TransactionsData.js";
 
 export default function TransactionComponent({ navigation }) {
+    const [sortedTransaction, setSortedTransaction] = useState()
+
+    useEffect(()=>{
+        let sorted = transactions.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+          });
+
+          setSortedTransaction(sorted);
+    },[])
 
     const list = useRef(null);
     const Separator = () => {
@@ -33,7 +42,7 @@ export default function TransactionComponent({ navigation }) {
             <FlatList
                 ref={list}
                 keyExtractor={(item) => item.id + item.name}
-                data={transactions}
+                data={sortedTransaction}
                 renderItem={renderItem}
             />
         </View>

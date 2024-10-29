@@ -1,17 +1,27 @@
 import { Text, View } from "react-native";
 import style from "./style";
 import { transactions } from "../../data/TransactionsData";
+import { useEffect, useState } from "react";
 
 export default function SummaryComponent(){
-    var totalIncome = 0;
-    var totalExpenses = 0;
+    const [totalIncome, setTotalIncome] = useState();
+    const [totalExpenses, setTotalExpenses] = useState();
 
-    for (const item of transactions) {
-        if(item.type == 'Expense') totalExpenses+=item.amount
-        else{
-            totalIncome+=item.amount
-        }
-      }
+    useEffect(()=>{
+        let income = 0;
+        let expense = 0;
+
+        for (const item of transactions) {
+            if(item.type == 'Expense') expense+=item.amount
+            else{
+                income+=item.amount
+            }
+          }
+
+          setTotalIncome(income);
+          setTotalExpenses(expense);
+
+    },[]);
     return(
         <View style = {style.container}>
             <View style = {style.section}>
